@@ -24,14 +24,14 @@ class RegistroForm(UserCreationForm):
             "last_name",
             "email",
             "escuela",
-            "semestre_actual",
+            "cuatrimestre_actual",
             "password1",
             "password2",
         ]
         labels = {
             "username": "Nombre de usuario",
             "escuela": "Escuela / Carrera",
-            "semestre_actual": "Semestre actual",
+            "cuatrimestre_actual": "Cuatrimestre actual",
         }
         widgets = {
             "username": forms.TextInput(attrs={"placeholder": "nombre.apellido"}),
@@ -43,9 +43,9 @@ class RegistroForm(UserCreationForm):
             "nombre"
         )
         self.fields["escuela"].required = False
-        self.fields["semestre_actual"].required = False
-        self.fields["semestre_actual"].widget.attrs["min"] = 1
-        self.fields["semestre_actual"].widget.attrs["max"] = 10
+        self.fields["cuatrimestre_actual"].required = False
+        self.fields["cuatrimestre_actual"].widget.attrs["min"] = 1
+        self.fields["cuatrimestre_actual"].widget.attrs["max"] = 10
         self.fields["password1"].label = "Contraseña"
         self.fields["password2"].label = "Confirmar contraseña"
         for field in self.fields.values():
@@ -55,13 +55,13 @@ class RegistroForm(UserCreationForm):
 class PerfilForm(forms.ModelForm):
     class Meta:
         model = Usuario
-        fields = ["first_name", "last_name", "email", "escuela", "semestre_actual"]
+        fields = ["first_name", "last_name", "email", "escuela", "cuatrimestre_actual"]
         labels = {
             "first_name": "Nombre",
             "last_name": "Apellido",
             "email": "Correo electrónico",
             "escuela": "Escuela / Carrera",
-            "semestre_actual": "Semestre actual",
+            "cuatrimestre_actual": "Cuatrimestre actual",
         }
 
     def __init__(self, *args, **kwargs):
@@ -70,8 +70,8 @@ class PerfilForm(forms.ModelForm):
             "nombre"
         )
         self.fields["escuela"].required = False
-        self.fields["semestre_actual"].required = False
-        self.fields["semestre_actual"].widget.attrs.update({"min": 1, "max": 10})
+        self.fields["cuatrimestre_actual"].required = False
+        self.fields["cuatrimestre_actual"].widget.attrs.update({"min": 1, "max": 10})
         self.fields["email"].required = True
 
 
@@ -87,8 +87,11 @@ class EventoForm(forms.ModelForm):
             "lugar",
             "escuela",
             "cupo_maximo",
-            "semestre_min",
-            "semestre_max",
+            "enlace_virtual",
+            "defensor",
+            "jurados",
+            "cuatrimestre_min",
+            "cuatrimestre_max",
             "imagen",
         ]
         labels = {
@@ -100,8 +103,11 @@ class EventoForm(forms.ModelForm):
             "lugar": "Lugar / Edificio",
             "escuela": "Escuela organizadora",
             "cupo_maximo": "Cupo máximo (0 = sin límite)",
-            "semestre_min": "Semestre mínimo relevante",
-            "semestre_max": "Semestre máximo relevante",
+            "enlace_virtual": "Enlace de reunión virtual",
+            "defensor": "Estudiante defensor",
+            "jurados": "Jurado",
+            "cuatrimestre_min": "Cuatrimestre mínimo relevante",
+            "cuatrimestre_max": "Cuatrimestre máximo relevante",
             "imagen": "Imagen del evento",
         }
         widgets = {
@@ -112,8 +118,9 @@ class EventoForm(forms.ModelForm):
                 attrs={"type": "datetime-local"}, format="%Y-%m-%dT%H:%M"
             ),
             "descripcion": forms.Textarea(attrs={"rows": 5}),
-            "semestre_min": forms.NumberInput(attrs={"min": 1, "max": 10}),
-            "semestre_max": forms.NumberInput(attrs={"min": 1, "max": 10}),
+            "jurados": forms.Textarea(attrs={"rows": 4, "placeholder": "Ej.\nDr. Carlos Méndez\nIng. Rosa Belén Castillo\nIng. José Rodríguez", "class": "w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-unphu resize-y"}),
+            "cuatrimestre_min": forms.NumberInput(attrs={"min": 1, "max": 10}),
+            "cuatrimestre_max": forms.NumberInput(attrs={"min": 1, "max": 10}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -121,8 +128,11 @@ class EventoForm(forms.ModelForm):
         self.fields["escuela"].queryset = Escuela.objects.select_related("facultad").order_by(
             "nombre"
         )
-        self.fields["semestre_min"].required = False
-        self.fields["semestre_max"].required = False
+        self.fields["enlace_virtual"].required = False
+        self.fields["defensor"].required = False
+        self.fields["jurados"].required = False
+        self.fields["cuatrimestre_min"].required = False
+        self.fields["cuatrimestre_max"].required = False
         self.fields["fecha_fin"].required = False
         self.fields["imagen"].required = False
         # Pre-populate datetime widgets correctly
@@ -140,8 +150,8 @@ class EventoForm(forms.ModelForm):
         cleaned = super().clean()
         fecha_inicio = cleaned.get("fecha_evento")
         fecha_fin = cleaned.get("fecha_fin")
-        sem_min = cleaned.get("semestre_min")
-        sem_max = cleaned.get("semestre_max")
+        sem_min = cleaned.get("cuatrimestre_min")
+        sem_max = cleaned.get("cuatrimestre_max")
 
         if fecha_inicio and fecha_inicio <= timezone.now():
             self.add_error("fecha_evento", "La fecha de inicio debe ser en el futuro.")
@@ -154,9 +164,16 @@ class EventoForm(forms.ModelForm):
 
         if sem_min and sem_max and sem_min > sem_max:
             self.add_error(
-                "semestre_max",
-                "El semestre máximo debe ser mayor o igual al semestre mínimo.",
+                "cuatrimestre_max",
+                "El cuatrimestre máximo debe ser mayor o igual al cuatrimestre mínimo.",
             )
+
+        if cleaned.get("tipo") == "TESIS":
+            if not cleaned.get("defensor"):
+                self.add_error("defensor", "El nombre del defensor es obligatorio para presentaciones de tesis.")
+            if not cleaned.get("jurados"):
+                self.add_error("jurados", "El jurado es obligatorio para presentaciones de tesis.")
+
         return cleaned
 
 

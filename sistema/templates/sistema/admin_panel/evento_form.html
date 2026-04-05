@@ -19,7 +19,7 @@
       <svg class="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
       <span>
         Publicado originalmente por
-        <strong>{{ evento.publicado_por.get_full_name|default:evento.publicado_por.username|default:"(desconocido)" }}</strong>
+        <strong>{% if evento.publicado_por %}{{ evento.publicado_por.get_full_name|default:evento.publicado_por.username }}{% else %}(desconocido){% endif %}</strong>
         el {{ evento.fecha_creacion|date:"d/m/Y \a \l\a\s g:i A" }}.
         El autor original se mantiene para fines de auditoría.
       </span>
@@ -97,6 +97,41 @@
           {% if form.lugar.errors %}<p class="text-red-500 text-xs mt-1">{{ form.lugar.errors.0 }}</p>{% endif %}
         </div>
 
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.enlace_virtual.label }}</label>
+          <input type="url" name="enlace_virtual" value="{{ form.enlace_virtual.value|default:'' }}"
+            class="w-full border {% if form.enlace_virtual.errors %}border-red-400{% else %}border-gray-300{% endif %} rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-unphu"
+            placeholder="https://zoom.us/j/... o https://meet.google.com/..." />
+          {% if form.enlace_virtual.errors %}<p class="text-red-500 text-xs mt-1">{{ form.enlace_virtual.errors.0 }}</p>{% endif %}
+          <p class="text-gray-400 text-xs mt-1">Opcional — Zoom, Google Meet, Teams, etc.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Datos de tesis (solo visible si tipo = TESIS) -->
+    <div id="seccion-tesis" class="bg-white rounded-xl border border-purple-200 shadow-sm p-6 hidden">
+      <h2 class="font-semibold text-gray-700 text-sm uppercase tracking-wide mb-4 flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-purple-500 inline-block"></span>
+        Datos de la defensa
+      </h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.defensor.label }}</label>
+          <input type="text" name="defensor" value="{{ form.defensor.value|default:'' }}"
+            class="w-full border {% if form.defensor.errors %}border-red-400{% else %}border-gray-300{% endif %} rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-unphu"
+            placeholder="Nombre completo del estudiante que defiende" />
+          {% if form.defensor.errors %}<p class="text-red-500 text-xs mt-1">{{ form.defensor.errors.0 }}</p>{% endif %}
+        </div>
+
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.jurados.label }}</label>
+          {{ form.jurados }}
+          {% if form.jurados.errors %}<p class="text-red-500 text-xs mt-1">{{ form.jurados.errors.0 }}</p>{% endif %}
+          <p class="text-gray-400 text-xs mt-1">Un nombre por línea.</p>
+        </div>
+
       </div>
     </div>
 
@@ -116,21 +151,21 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.semestre_min.label }}</label>
-          <input type="number" name="semestre_min" min="1" max="10"
-            value="{{ form.semestre_min.value|default:'' }}"
+          <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.cuatrimestre_min.label }}</label>
+          <input type="number" name="cuatrimestre_min" min="1" max="10"
+            value="{{ form.cuatrimestre_min.value|default:'' }}"
             class="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-unphu"
             placeholder="1" />
-          {% if form.semestre_min.errors %}<p class="text-red-500 text-xs mt-1">{{ form.semestre_min.errors.0 }}</p>{% endif %}
+          {% if form.cuatrimestre_min.errors %}<p class="text-red-500 text-xs mt-1">{{ form.cuatrimestre_min.errors.0 }}</p>{% endif %}
         </div>
 
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.semestre_max.label }}</label>
-          <input type="number" name="semestre_max" min="1" max="10"
-            value="{{ form.semestre_max.value|default:'' }}"
-            class="w-full border {% if form.semestre_max.errors %}border-red-400{% else %}border-gray-300{% endif %} rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-unphu"
+          <label class="block text-sm font-medium text-gray-700 mb-1">{{ form.cuatrimestre_max.label }}</label>
+          <input type="number" name="cuatrimestre_max" min="1" max="10"
+            value="{{ form.cuatrimestre_max.value|default:'' }}"
+            class="w-full border {% if form.cuatrimestre_max.errors %}border-red-400{% else %}border-gray-300{% endif %} rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-unphu"
             placeholder="10" />
-          {% if form.semestre_max.errors %}<p class="text-red-500 text-xs mt-1">{{ form.semestre_max.errors.0 }}</p>{% endif %}
+          {% if form.cuatrimestre_max.errors %}<p class="text-red-500 text-xs mt-1">{{ form.cuatrimestre_max.errors.0 }}</p>{% endif %}
         </div>
 
         <div>
@@ -172,4 +207,22 @@
 
   </form>
 </div>
+
+<script>
+  (function () {
+    const tipoSelect = document.querySelector('select[name="tipo"]');
+    const seccionTesis = document.getElementById('seccion-tesis');
+
+    function toggleTesis() {
+      if (tipoSelect.value === 'TESIS') {
+        seccionTesis.classList.remove('hidden');
+      } else {
+        seccionTesis.classList.add('hidden');
+      }
+    }
+
+    tipoSelect.addEventListener('change', toggleTesis);
+    toggleTesis(); // estado inicial al cargar la página
+  })();
+</script>
 {% endblock %}

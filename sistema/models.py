@@ -44,11 +44,11 @@ class Usuario(AbstractUser):
     escuela = models.ForeignKey(
         Escuela, on_delete=models.SET_NULL, null=True, blank=True
     )
-    semestre_actual = models.IntegerField(
+    cuatrimestre_actual = models.IntegerField(
         null=True,
         blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(10)],
-        help_text="Semestre actual del estudiante (1–10)",
+        help_text="Cuatrimestre actual del estudiante (1–10)",
     )
 
     class Meta:
@@ -129,6 +129,22 @@ class Evento(models.Model):
         Escuela, on_delete=models.CASCADE, verbose_name="Escuela"
     )
     lugar = models.CharField(max_length=200, verbose_name="Lugar / Edificio")
+    enlace_virtual = models.URLField(
+        blank=True,
+        verbose_name="Enlace de reunión virtual",
+        help_text="URL de Zoom, Google Meet, Teams, etc. (opcional)",
+    )
+    defensor = models.CharField(
+        max_length=200,
+        blank=True,
+        verbose_name="Estudiante defensor",
+        help_text="Solo para presentaciones de tesis",
+    )
+    jurados = models.TextField(
+        blank=True,
+        verbose_name="Jurado",
+        help_text="Un nombre por línea. Solo para presentaciones de tesis.",
+    )
     imagen = models.ImageField(
         upload_to="eventos/",
         null=True,
@@ -143,19 +159,19 @@ class Evento(models.Model):
         related_name="eventos_publicados",
         verbose_name="Publicado por",
     )
-    semestre_min = models.IntegerField(
+    cuatrimestre_min = models.IntegerField(
         null=True,
         blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(10)],
-        verbose_name="Semestre mínimo relevante",
-        help_text="Dejar vacío si aplica a todos los semestres",
+        verbose_name="Cuatrimestre mínimo relevante",
+        help_text="Dejar vacío si aplica a todos los cuatrimestres",
     )
-    semestre_max = models.IntegerField(
+    cuatrimestre_max = models.IntegerField(
         null=True,
         blank=True,
         validators=[MinValueValidator(1), MaxValueValidator(10)],
-        verbose_name="Semestre máximo relevante",
-        help_text="Dejar vacío si aplica a todos los semestres",
+        verbose_name="Cuatrimestre máximo relevante",
+        help_text="Dejar vacío si aplica a todos los cuatrimestres",
     )
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_modificacion = models.DateTimeField(auto_now=True)

@@ -53,6 +53,36 @@
         {{ evento.descripcion|linebreaks }}
       </div>
 
+      <!-- Defensor y jurado (solo tesis) -->
+      {% if evento.tipo == 'TESIS' and evento.defensor or evento.tipo == 'TESIS' and evento.jurados %}
+        <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+
+          {% if evento.defensor %}
+            <div class="bg-purple-50 border border-purple-100 rounded-xl p-4">
+              <p class="text-xs font-semibold uppercase tracking-wide text-purple-500 mb-2">Estudiante defensor</p>
+              <p class="font-medium text-gray-800">{{ evento.defensor }}</p>
+            </div>
+          {% endif %}
+
+          {% if evento.jurados %}
+            <div class="bg-gray-50 border border-gray-100 rounded-xl p-4">
+              <p class="text-xs font-semibold uppercase tracking-wide text-gray-400 mb-2">Jurado</p>
+              <ul class="space-y-1">
+                {% for jurado in evento.jurados.splitlines %}
+                  {% if jurado %}
+                    <li class="text-sm text-gray-700 flex items-center gap-2">
+                      <span class="w-1.5 h-1.5 rounded-full bg-unphu flex-shrink-0"></span>
+                      {{ jurado }}
+                    </li>
+                  {% endif %}
+                {% endfor %}
+              </ul>
+            </div>
+          {% endif %}
+
+        </div>
+      {% endif %}
+
       {% if evento.publicado_por %}
         <p class="mt-6 text-xs text-gray-400">
           Publicado por <span class="font-medium text-gray-500">{{ evento.publicado_por.get_full_name|default:evento.publicado_por.username }}</span>
@@ -99,6 +129,20 @@
             </dt>
             <dd class="text-gray-700">{{ evento.lugar }}</dd>
           </div>
+
+          {% if evento.enlace_virtual %}
+            <div class="flex items-start gap-3">
+              <dt class="flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-unphu" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.723v6.554a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              </dt>
+              <dd>
+                <a href="{{ evento.enlace_virtual }}" target="_blank" rel="noopener noreferrer"
+                  class="text-unphu hover:underline font-medium text-sm break-all">
+                  Unirse a la reunión virtual
+                </a>
+              </dd>
+            </div>
+          {% endif %}
 
           <div class="flex items-start gap-3">
             <dt class="flex-shrink-0 mt-0.5">
@@ -182,16 +226,16 @@
           </button>
         {% endif %}
 
-        <!-- Semestre relevante -->
-        {% if evento.semestre_min or evento.semestre_max %}
+        <!-- Cuatrimestre relevante -->
+        {% if evento.cuatrimestre_min or evento.cuatrimestre_max %}
           <p class="mt-4 text-xs text-center text-gray-400">
-            Dirigido a estudiantes de semestre
-            {% if evento.semestre_min and evento.semestre_max %}
-              {{ evento.semestre_min }}–{{ evento.semestre_max }}
-            {% elif evento.semestre_min %}
-              {{ evento.semestre_min }} en adelante
+            Dirigido a estudiantes de cuatrimestre
+            {% if evento.cuatrimestre_min and evento.cuatrimestre_max %}
+              {{ evento.cuatrimestre_min }}–{{ evento.cuatrimestre_max }}
+            {% elif evento.cuatrimestre_min %}
+              {{ evento.cuatrimestre_min }} en adelante
             {% else %}
-              hasta {{ evento.semestre_max }}
+              hasta {{ evento.cuatrimestre_max }}
             {% endif %}
           </p>
         {% endif %}

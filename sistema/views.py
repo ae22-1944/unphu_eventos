@@ -56,15 +56,15 @@ def _calcular_prioridad(evento, usuario):
         score += 2
     if (
         evento.tipo == "TESIS"
-        and usuario.semestre_actual
-        and usuario.semestre_actual >= 7
+        and usuario.cuatrimestre_actual
+        and usuario.cuatrimestre_actual >= 7
     ):
         score += 2
     if (
-        evento.semestre_min is not None
-        and evento.semestre_max is not None
-        and usuario.semestre_actual is not None
-        and evento.semestre_min <= usuario.semestre_actual <= evento.semestre_max
+        evento.cuatrimestre_min is not None
+        and evento.cuatrimestre_max is not None
+        and usuario.cuatrimestre_actual is not None
+        and evento.cuatrimestre_min <= usuario.cuatrimestre_actual <= evento.cuatrimestre_max
     ):
         score += 1
     return score

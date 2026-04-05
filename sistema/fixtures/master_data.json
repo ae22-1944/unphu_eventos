@@ -1,0 +1,481 @@
+[
+  {
+    "model": "sistema.facultad",
+    "pk": 1,
+    "fields": { "nombre": "Facultad de Ciencias y Tecnología" }
+  },
+  {
+    "model": "sistema.facultad",
+    "pk": 2,
+    "fields": { "nombre": "Facultad de Ciencias Jurídicas y Políticas" }
+  },
+  {
+    "model": "sistema.facultad",
+    "pk": 3,
+    "fields": { "nombre": "Facultad de Ciencias Económicas y Sociales" }
+  },
+  {
+    "model": "sistema.facultad",
+    "pk": 4,
+    "fields": { "nombre": "Facultad de Arquitectura y Artes" }
+  },
+  {
+    "model": "sistema.facultad",
+    "pk": 5,
+    "fields": { "nombre": "Facultad de Ciencias de la Salud" }
+  },
+
+  {
+    "model": "sistema.escuela",
+    "pk": 1,
+    "fields": { "nombre": "Escuela de Informática", "facultad": 1 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 2,
+    "fields": { "nombre": "Escuela de Ingeniería Civil", "facultad": 1 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 3,
+    "fields": { "nombre": "Escuela de Ingeniería Eléctrica", "facultad": 1 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 4,
+    "fields": { "nombre": "Escuela de Ingeniería Industrial", "facultad": 1 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 5,
+    "fields": { "nombre": "Escuela de Derecho", "facultad": 2 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 6,
+    "fields": { "nombre": "Escuela de Administración de Empresas", "facultad": 3 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 7,
+    "fields": { "nombre": "Escuela de Contabilidad", "facultad": 3 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 8,
+    "fields": { "nombre": "Escuela de Arquitectura", "facultad": 4 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 9,
+    "fields": { "nombre": "Escuela de Medicina", "facultad": 5 }
+  },
+  {
+    "model": "sistema.escuela",
+    "pk": 10,
+    "fields": { "nombre": "Escuela de Psicología", "facultad": 5 }
+  },
+
+  {
+    "model": "sistema.evento",
+    "pk": 1,
+    "fields": {
+      "titulo": "Defensa de Tesis: Sistema de Gestión de Inventarios con IA",
+      "descripcion": "El estudiante Fraiman Lara presentará su proyecto de grado sobre un sistema de gestión de inventarios que integra modelos de inteligencia artificial para predicción de demanda y optimización de stock en pequeñas y medianas empresas dominicanas.\n\nJurado: Dr. Carlos Méndez, Ing. Rosa Belén Castillo, Ing. José Rodríguez.",
+      "tipo": "TESIS",
+      "cupo_maximo": 60,
+      "fecha_evento": "2026-04-15T09:00:00",
+      "fecha_fin": "2026-04-15T11:00:00",
+      "escuela": 1,
+      "lugar": "Auditorio Principal — Edificio A",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-01T10:00:00",
+      "fecha_modificacion": "2026-04-01T10:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 2,
+    "fields": {
+      "titulo": "Defensa de Tesis: Plataforma Web de Telemedicina para Zonas Rurales",
+      "descripcion": "La estudiante María González presentará su investigación sobre el diseño e implementación de una plataforma web de telemedicina orientada a facilitar el acceso a servicios de salud en comunidades rurales de la República Dominicana.\n\nJurado: Dra. Elena Soriano, Dr. Fernando Vargas, Dra. Miriam Castillo.",
+      "tipo": "TESIS",
+      "cupo_maximo": 50,
+      "fecha_evento": "2026-04-18T10:00:00",
+      "fecha_fin": "2026-04-18T12:00:00",
+      "escuela": 9,
+      "lugar": "Salón de Conferencias — Edificio de Salud, Piso 3",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-01T11:00:00",
+      "fecha_modificacion": "2026-04-01T11:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 3,
+    "fields": {
+      "titulo": "Defensa de Tesis: Análisis Estructural de Puentes Peatonales Urbanos",
+      "descripcion": "El estudiante Esteban Zabala expondrá su proyecto de grado sobre el análisis estructural y propuesta de diseño para puentes peatonales en zonas urbanas del Gran Santo Domingo, aplicando normas internacionales AASHTO y criterios locales.\n\nJurado: Ing. Ramón Torres, Ing. Patricia Almánzar, Dr. Luis Féliz.",
+      "tipo": "TESIS",
+      "cupo_maximo": 45,
+      "fecha_evento": "2026-04-22T14:00:00",
+      "fecha_fin": "2026-04-22T16:30:00",
+      "escuela": 2,
+      "lugar": "Aula Magna — Facultad de Ciencias y Tecnología",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-02T09:00:00",
+      "fecha_modificacion": "2026-04-02T09:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 4,
+    "fields": {
+      "titulo": "Defensa de Tesis: Estrategias de Marketing Digital para PYMEs en RD",
+      "descripcion": "La estudiante Carolina Méndez presenta su tesis sobre estrategias de marketing digital adaptadas al contexto dominicano para pequeñas y medianas empresas, con énfasis en redes sociales, SEO y analítica web.\n\nJurado: Dr. Manuel Henríquez, Lic. Sandra Pérez, Lic. Roberto Almonte.",
+      "tipo": "TESIS",
+      "cupo_maximo": 40,
+      "fecha_evento": "2026-04-25T09:30:00",
+      "fecha_fin": "2026-04-25T11:30:00",
+      "escuela": 6,
+      "lugar": "Sala de Conferencias — Edificio de Empresariales, Piso 2",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-02T10:00:00",
+      "fecha_modificacion": "2026-04-02T10:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 5,
+    "fields": {
+      "titulo": "Defensa de Tesis: Diseño Bioclimático en Viviendas de Interés Social",
+      "descripcion": "La estudiante Valeria Rodríguez presentará su proyecto de grado sobre la aplicación de principios bioclimáticos al diseño de viviendas de interés social en el clima tropical dominicano, buscando reducir el consumo energético.\n\nJurado: Arq. Laura Soto, Arq. David Núñez, Dr. Carlos Fernández.",
+      "tipo": "TESIS",
+      "cupo_maximo": 35,
+      "fecha_evento": "2026-05-02T10:00:00",
+      "fecha_fin": "2026-05-02T12:00:00",
+      "escuela": 8,
+      "lugar": "Sala de Exposiciones — Escuela de Arquitectura",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-03T09:00:00",
+      "fecha_modificacion": "2026-04-03T09:00:00"
+    }
+  },
+
+  {
+    "model": "sistema.evento",
+    "pk": 6,
+    "fields": {
+      "titulo": "Charla: Introducción a la Ciberseguridad y Ethical Hacking",
+      "descripcion": "Conferencia a cargo del Ing. Marcos Jiménez (certificado CEH) sobre conceptos fundamentales de ciberseguridad ofensiva y defensiva. Se abordarán temas como vectores de ataque más comunes, metodologías de pentesting, y cómo las organizaciones dominicanas pueden proteger sus activos digitales.\n\nDirigido a estudiantes de Informática e Ingeniería. No se requieren conocimientos previos avanzados.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 80,
+      "fecha_evento": "2026-04-10T16:00:00",
+      "fecha_fin": "2026-04-10T18:00:00",
+      "escuela": 1,
+      "lugar": "Laboratorio de Cómputo 3 — Edificio B, Piso 1",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 3,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-01T14:00:00",
+      "fecha_modificacion": "2026-04-01T14:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 7,
+    "fields": {
+      "titulo": "Taller: Desarrollo de APIs REST con Django y Django REST Framework",
+      "descripcion": "Taller práctico de 3 horas sobre el desarrollo de APIs RESTful usando Python y Django REST Framework. Los participantes construirán una API funcional desde cero, aplicando conceptos de autenticación con JWT, serializers, viewsets y documentación automática con Swagger.\n\nRequisito: traer laptop con Python 3.11+ instalado. Cupos muy limitados.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 25,
+      "fecha_evento": "2026-04-12T09:00:00",
+      "fecha_fin": "2026-04-12T12:00:00",
+      "escuela": 1,
+      "lugar": "Laboratorio de Desarrollo de Software — Edificio B, Piso 2",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 5,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-01T15:00:00",
+      "fecha_modificacion": "2026-04-01T15:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 8,
+    "fields": {
+      "titulo": "Seminario: Inteligencia Artificial Generativa y su Impacto en el Mercado Laboral",
+      "descripcion": "Panel de expertos sobre el impacto de la IA generativa (ChatGPT, Copilot, Gemini) en el mercado laboral tecnológico dominicano y regional. Se discutirán oportunidades de especialización, nuevos perfiles profesionales y las competencias que los graduados deben desarrollar para mantenerse competitivos.\n\nPanelistas: CEO de TechRD, Director de Innovación del Banco Popular, Directora académica de ITLA.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 100,
+      "fecha_evento": "2026-04-17T15:00:00",
+      "fecha_fin": "2026-04-17T17:30:00",
+      "escuela": 1,
+      "lugar": "Auditorio Principal — Edificio A",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-02T08:00:00",
+      "fecha_modificacion": "2026-04-02T08:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 9,
+    "fields": {
+      "titulo": "Taller: Diseño de Estructuras de Concreto con ETABS",
+      "descripcion": "Taller práctico sobre el uso del software ETABS para análisis y diseño estructural de edificaciones de concreto reforzado. Se modelará un edificio de 5 niveles aplicando el Reglamento MOPC R-001 y la norma ACI 318.\n\nRequisito: conocimientos básicos de análisis estructural. Traer laptop con ETABS instalado (licencia de prueba disponible en el sitio oficial).",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 30,
+      "fecha_evento": "2026-04-19T08:00:00",
+      "fecha_fin": "2026-04-19T12:00:00",
+      "escuela": 2,
+      "lugar": "Sala de CAD — Ingeniería Civil, Piso 3",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 6,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-02T11:00:00",
+      "fecha_modificacion": "2026-04-02T11:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 10,
+    "fields": {
+      "titulo": "Charla: Emprendimiento Legal — Cómo Constituir tu Empresa en RD",
+      "descripcion": "El Dr. Héctor Martínez, abogado corporativo con 15 años de experiencia, explicará el proceso legal para la constitución de empresas en República Dominicana, tipos societarios (SRL, SA), registro mercantil, aspectos tributarios básicos (DGII) y protección de propiedad intelectual.\n\nIdeal para estudiantes próximos a graduarse con ideas de negocios.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 60,
+      "fecha_evento": "2026-04-24T17:00:00",
+      "fecha_fin": "2026-04-24T19:00:00",
+      "escuela": 5,
+      "lugar": "Aula 301 — Edificio de Derecho, Piso 3",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 7,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-03T10:00:00",
+      "fecha_modificacion": "2026-04-03T10:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 11,
+    "fields": {
+      "titulo": "Taller de Mindfulness y Manejo del Estrés Académico",
+      "descripcion": "Sesión práctica guiada por la Dra. Ana Belén Reyes, psicóloga clínica, orientada a estudiantes que se encuentran en etapas de alta exigencia académica (semestres finales, trabajo de grado). Se abordarán técnicas de respiración, meditación guiada y estrategias cognitivas para manejar la ansiedad ante exámenes y presentaciones.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 40,
+      "fecha_evento": "2026-04-29T14:00:00",
+      "fecha_fin": "2026-04-29T16:00:00",
+      "escuela": 10,
+      "lugar": "Sala de Bienestar Estudiantil — Edificio Administrativo, Piso 1",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-03T12:00:00",
+      "fecha_modificacion": "2026-04-03T12:00:00"
+    }
+  },
+
+  {
+    "model": "sistema.evento",
+    "pk": 12,
+    "fields": {
+      "titulo": "Ceremonia de Premiación: Mejores Promedios del Año Académico 2025",
+      "descripcion": "Ceremonia institucional en la que se reconocerá a los estudiantes con los promedios más altos de todas las facultades durante el año académico 2025. Asistirán autoridades universitarias, familiares de los homenajeados y representantes del cuerpo docente.\n\nEntrada libre para toda la comunidad universitaria. Vestimenta: formal.",
+      "tipo": "INSTITUCIONAL",
+      "cupo_maximo": 0,
+      "fecha_evento": "2026-05-07T18:00:00",
+      "fecha_fin": "2026-05-07T20:00:00",
+      "escuela": 1,
+      "lugar": "Auditorio Principal — Edificio A",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-01T09:00:00",
+      "fecha_modificacion": "2026-04-01T09:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 13,
+    "fields": {
+      "titulo": "Feria de Empleo UNPHU 2026 — Conecta con más de 40 Empresas",
+      "descripcion": "La Feria de Empleo UNPHU reúne a más de 40 empresas líderes de los sectores tecnológico, financiero, legal, construcción y salud. Los estudiantes podrán entregar su currículum, realizar entrevistas on-the-spot y conocer programas de pasantías y puestos de entrada.\n\nEmpresas confirmadas: Claro RD, Banco BHD, Veektor, AES Dominicana, Grupo Ramos, entre otras.\n\nTrae múltiples copias de tu CV y vestimenta formal o semi-formal.",
+      "tipo": "INSTITUCIONAL",
+      "cupo_maximo": 0,
+      "fecha_evento": "2026-04-30T09:00:00",
+      "fecha_fin": "2026-04-30T15:00:00",
+      "escuela": 6,
+      "lugar": "Patio Central — Campus UNPHU",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 7,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-01T16:00:00",
+      "fecha_modificacion": "2026-04-01T16:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 14,
+    "fields": {
+      "titulo": "Aviso: Actualización del Calendario Académico — Semestre Mayo-Agosto 2026",
+      "descripcion": "La Dirección Académica informa que el calendario del semestre Mayo-Agosto 2026 ha sido actualizado con las siguientes modificaciones:\n\n• Inicio de clases: 5 de mayo de 2026\n• Primer parcial: semana del 9 al 13 de junio\n• Segundo parcial: semana del 14 al 18 de julio\n• Exámenes finales: del 10 al 22 de agosto\n• Cierre de notas: 28 de agosto\n\nConsultar el calendario completo en el portal institucional UNPHUSIST.",
+      "tipo": "INSTITUCIONAL",
+      "cupo_maximo": 0,
+      "fecha_evento": "2026-04-20T08:00:00",
+      "fecha_fin": null,
+      "escuela": 1,
+      "lugar": "Virtual — Portal Institucional",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-04T08:00:00",
+      "fecha_modificacion": "2026-04-04T08:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 15,
+    "fields": {
+      "titulo": "Hackathon UNPHU 2026: Soluciones Tech para la Salud",
+      "descripcion": "Primera edición del Hackathon UNPHU. Equipos de 3 a 5 personas tendrán 24 horas para desarrollar soluciones tecnológicas orientadas a mejorar el sistema de salud dominicano. Se evaluará impacto, viabilidad técnica y presentación.\n\nPremios:\n🥇 1er lugar: RD$ 50,000 + mentoría empresarial\n🥈 2do lugar: RD$ 25,000\n🥉 3er lugar: RD$ 10,000\n\nInscripciones abiertas hasta el 25 de abril. Equipos multidisciplinarios son bienvenidos.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 120,
+      "fecha_evento": "2026-05-09T08:00:00",
+      "fecha_fin": "2026-05-10T10:00:00",
+      "escuela": 1,
+      "lugar": "Laboratorios de Informática — Edificio B, Pisos 1 y 2",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-04T10:00:00",
+      "fecha_modificacion": "2026-04-04T10:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 16,
+    "fields": {
+      "titulo": "Defensa de Tesis: Aplicación Móvil para la Gestión de Citas Médicas",
+      "descripcion": "El estudiante Marvin Hernández presentará su proyecto de grado sobre el desarrollo de una aplicación móvil multiplataforma (Flutter) para la gestión de citas médicas en clínicas privadas de Santo Domingo, integrando recordatorios automáticos y historial clínico básico.\n\nJurado: Ing. Sergio Cabral, Ing. Paola Jiménez, Dr. Alberto Rosario.",
+      "tipo": "TESIS",
+      "cupo_maximo": 55,
+      "fecha_evento": "2026-05-06T09:00:00",
+      "fecha_fin": "2026-05-06T11:00:00",
+      "escuela": 1,
+      "lugar": "Auditorio Principal — Edificio A",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-04T11:00:00",
+      "fecha_modificacion": "2026-04-04T11:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 17,
+    "fields": {
+      "titulo": "Charla: Contabilidad Forense y Detección de Fraudes Financieros",
+      "descripcion": "El CPA Miguel Ángel Ortiz compartirá su experiencia en auditoría forense y detección de irregularidades contables en empresas dominicanas. Se analizarán casos reales (anonimizados), técnicas de auditoría digital y el rol del contador en investigaciones judiciales.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 50,
+      "fecha_evento": "2026-04-16T16:00:00",
+      "fecha_fin": "2026-04-16T18:00:00",
+      "escuela": 7,
+      "lugar": "Aula 202 — Edificio de Ciencias Económicas",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 5,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-03T14:00:00",
+      "fecha_modificacion": "2026-04-03T14:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 18,
+    "fields": {
+      "titulo": "Aviso: Convocatoria de Beca de Excelencia Académica 2026",
+      "descripcion": "La Oficina de Becas y Asuntos Estudiantiles informa que están abiertas las postulaciones para la Beca de Excelencia Académica 2026, dirigida a estudiantes con índice académico igual o superior a 90 y sin materias reprobadas.\n\nBeneficios: cubierta del 50% al 100% de la matrícula del semestre Mayo-Agosto 2026.\n\nFecha límite de aplicación: 30 de abril de 2026.\nDocumentos requeridos: récord de notas, carta de motivación, carta de recomendación docente.\n\nInformación en la Oficina de Becas, Edificio Administrativo, Piso 2.",
+      "tipo": "INSTITUCIONAL",
+      "cupo_maximo": 0,
+      "fecha_evento": "2026-04-08T08:00:00",
+      "fecha_fin": null,
+      "escuela": 1,
+      "lugar": "Oficina de Becas — Edificio Administrativo, Piso 2",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 3,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-04T13:00:00",
+      "fecha_modificacion": "2026-04-04T13:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 19,
+    "fields": {
+      "titulo": "Taller de Fotografía Arquitectónica con Smartphone",
+      "descripcion": "Taller práctico para estudiantes de Arquitectura y Diseño sobre técnicas de fotografía arquitectónica usando únicamente el smartphone. Se abordarán composición, manejo de luz natural, edición con Lightroom Mobile y uso efectivo de imágenes en portafolios digitales.",
+      "tipo": "ACADEMICA",
+      "cupo_maximo": 20,
+      "fecha_evento": "2026-04-26T10:00:00",
+      "fecha_fin": "2026-04-26T13:00:00",
+      "escuela": 8,
+      "lugar": "Patio de la Escuela de Arquitectura",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": 3,
+      "semestre_max": 10,
+      "fecha_creacion": "2026-04-03T16:00:00",
+      "fecha_modificacion": "2026-04-03T16:00:00"
+    }
+  },
+  {
+    "model": "sistema.evento",
+    "pk": 20,
+    "fields": {
+      "titulo": "Defensa de Tesis: Impacto del Código Procesal Penal en los Derechos del Imputado",
+      "descripcion": "La estudiante Stephanie Núñez presentará su tesis de grado sobre el análisis comparativo del impacto del Código Procesal Penal dominicano en la protección de los derechos fundamentales del imputado, con especial énfasis en los principios de presunción de inocencia y defensa técnica.\n\nJurado: Dr. Francisco Peña, Dra. Carmen Luisa Tejeda, Dr. Rafael Almánzar.",
+      "tipo": "TESIS",
+      "cupo_maximo": 35,
+      "fecha_evento": "2026-05-14T10:00:00",
+      "fecha_fin": "2026-05-14T12:30:00",
+      "escuela": 5,
+      "lugar": "Salón de Actos — Facultad de Ciencias Jurídicas, Piso 2",
+      "imagen": "",
+      "publicado_por": null,
+      "semestre_min": null,
+      "semestre_max": null,
+      "fecha_creacion": "2026-04-04T14:00:00",
+      "fecha_modificacion": "2026-04-04T14:00:00"
+    }
+  }
+]
