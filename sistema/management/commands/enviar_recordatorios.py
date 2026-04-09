@@ -12,15 +12,24 @@ from sistema.models import Inscripcion
 class Command(BaseCommand):
     help = "Envía recordatorios por correo a usuarios inscritos en eventos próximos"
 
+    def add_arguments(self, parser):
+        parser.add_argument(
+            "--forzar",
+            action="store_true",
+            help=(
+                "Ignora la ventana de tiempo y envía recordatorio a todos los eventos "
+                "futuros en los que el usuario está inscrito. Útil para pruebas y demos."
+            ),
+        )
+
     def handle(self, *args, **options):
+        forzar = options["forzar"]
         ahora = timezone.now()
         enviados = 0
         errores = 0
 
-        # Traer todas las inscripciones pendientes de recordatorio con evento futuro
         inscripciones = (
             Inscripcion.objects.filter(
-                recordatorio_enviado=False,
                 evento__fecha_evento__gt=ahora,
                 usuario__configuracion_notificacion__recordatorio_evento=True,
             )
@@ -32,14 +41,25 @@ class Command(BaseCommand):
             )
         )
 
+        if forzar:
+            self.stdout.write(
+                self.style.WARNING("Modo --forzar activo: se ignora la ventana de tiempo.")
+            )
+            # Resetear recordatorio_enviado para poder reenviar durante demos
+            inscripciones.update(recordatorio_enviado=False)
+        else:
+            inscripciones = inscripciones.filter(recordatorio_enviado=False)
+
         for inscripcion in inscripciones:
             config = inscripcion.usuario.configuracion_notificacion
-            dias = config.dias_recordatorio
-            ventana_inicio = ahora + timedelta(days=dias) - timedelta(hours=1)
-            ventana_fin = ahora + timedelta(days=dias) + timedelta(hours=1)
 
-            if not (ventana_inicio <= inscripcion.evento.fecha_evento <= ventana_fin):
-                continue
+            if not forzar:
+                horas = config.horas_recordatorio
+                ventana_inicio = ahora + timedelta(hours=horas) - timedelta(minutes=15)
+                ventana_fin = ahora + timedelta(hours=horas) + timedelta(minutes=15)
+
+                if not (ventana_inicio <= inscripcion.evento.fecha_evento <= ventana_fin):
+                    continue
 
             if not inscripcion.usuario.email:
                 continue
@@ -51,7 +71,7 @@ class Command(BaseCommand):
                     {
                         "usuario": inscripcion.usuario,
                         "evento": inscripcion.evento,
-                        "dias": dias,
+                        "horas": config.horas_recordatorio,
                     },
                 )
                 send_mail(

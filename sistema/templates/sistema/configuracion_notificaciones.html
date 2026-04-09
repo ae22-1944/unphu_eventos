@@ -43,21 +43,21 @@
           <label class="relative inline-flex items-center cursor-pointer flex-shrink-0">
             <input type="checkbox" name="recordatorio_evento" id="id_recordatorio_toggle" class="sr-only peer"
               {% if form.recordatorio_evento.value %}checked{% endif %}
-              onchange="document.getElementById('dias_config').classList.toggle('hidden', !this.checked)" />
+              onchange="document.getElementById('horas_config').classList.toggle('hidden', !this.checked)" />
             <div class="w-11 h-6 bg-gray-200 peer-focus:ring-2 peer-focus:ring-unphu rounded-full peer peer-checked:bg-unphu peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:rounded-full after:h-5 after:w-5 after:transition-all"></div>
           </label>
         </div>
 
-        <div id="dias_config" class="{% if not form.recordatorio_evento.value %}hidden{% endif %} border-t border-gray-100 pt-4">
-          <label class="block text-sm font-medium text-gray-700 mb-1">Días de anticipación</label>
+        <div id="horas_config" class="{% if not form.recordatorio_evento.value %}hidden{% endif %} border-t border-gray-100 pt-4">
+          <label class="block text-sm font-medium text-gray-700 mb-1">Horas de anticipación</label>
           <div class="flex items-center gap-3">
-            <input type="number" name="dias_recordatorio" min="1" max="30"
-              value="{{ form.dias_recordatorio.value|default:1 }}"
+            <input type="number" name="horas_recordatorio" min="1" max="72"
+              value="{{ form.horas_recordatorio.value|default:1 }}"
               class="w-24 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-unphu" />
-            <span class="text-sm text-gray-500">día(s) antes del evento</span>
+            <span class="text-sm text-gray-500">hora(s) antes del evento</span>
           </div>
-          {% if form.dias_recordatorio.errors %}
-            <p class="text-red-500 text-xs mt-1">{{ form.dias_recordatorio.errors.0 }}</p>
+          {% if form.horas_recordatorio.errors %}
+            <p class="text-red-500 text-xs mt-1">{{ form.horas_recordatorio.errors.0 }}</p>
           {% endif %}
         </div>
       </div>

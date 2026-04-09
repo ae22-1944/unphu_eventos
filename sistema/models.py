@@ -78,11 +78,11 @@ class ConfiguracionNotificacion(models.Model):
         verbose_name="Recordatorio de evento",
         help_text="Recibir recordatorio antes del evento",
     )
-    dias_recordatorio = models.PositiveSmallIntegerField(
+    horas_recordatorio = models.PositiveSmallIntegerField(
         default=1,
         validators=[MinValueValidator(1)],
-        verbose_name="Días de anticipación",
-        help_text="Cuántos días antes del evento recibir el recordatorio",
+        verbose_name="Horas de anticipación",
+        help_text="Cuántas horas antes del evento recibir el recordatorio",
     )
     notificar_nueva_actividad_escuela = models.BooleanField(
         default=True,
@@ -159,17 +159,22 @@ class Evento(models.Model):
         related_name="eventos_publicados",
         verbose_name="Publicado por",
     )
+    es_cocurricular = models.BooleanField(
+        default=False,
+        verbose_name="Cuenta como horas cocurriculares",
+        help_text="Marcar si este evento otorga horas cocurriculares a los inscritos",
+    )
     cuatrimestre_min = models.IntegerField(
         null=True,
         blank=True,
-        validators=[MinValueValidator(1), MaxValueValidator(10)],
+        validators=[MinValueValidator(1), MaxValueValidator(12)],
         verbose_name="Cuatrimestre mínimo relevante",
         help_text="Dejar vacío si aplica a todos los cuatrimestres",
     )
     cuatrimestre_max = models.IntegerField(
         null=True,
         blank=True,
-        validators=[MinValueValidator(1), MaxValueValidator(10)],
+        validators=[MinValueValidator(1), MaxValueValidator(12)],
         verbose_name="Cuatrimestre máximo relevante",
         help_text="Dejar vacío si aplica a todos los cuatrimestres",
     )
@@ -194,6 +199,14 @@ class Evento(models.Model):
         if self.cupo_maximo == 0:
             return True
         return self.cupos_disponibles() > 0
+
+    @property
+    def horas_cocurriculares(self):
+        """Duración del evento redondeada a 0.5 horas. None si no tiene fecha_fin."""
+        if not self.fecha_fin:
+            return None
+        total = (self.fecha_fin - self.fecha_evento).total_seconds() / 3600
+        return round(total * 2) / 2
 
 
 class Inscripcion(models.Model):

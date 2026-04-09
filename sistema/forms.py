@@ -88,6 +88,7 @@ class EventoForm(forms.ModelForm):
             "escuela",
             "cupo_maximo",
             "enlace_virtual",
+            "es_cocurricular",
             "defensor",
             "jurados",
             "cuatrimestre_min",
@@ -104,6 +105,7 @@ class EventoForm(forms.ModelForm):
             "escuela": "Escuela organizadora",
             "cupo_maximo": "Cupo máximo (0 = sin límite)",
             "enlace_virtual": "Enlace de reunión virtual",
+            "es_cocurricular": "Cuenta como horas cocurriculares",
             "defensor": "Estudiante defensor",
             "jurados": "Jurado",
             "cuatrimestre_min": "Cuatrimestre mínimo relevante",
@@ -119,8 +121,8 @@ class EventoForm(forms.ModelForm):
             ),
             "descripcion": forms.Textarea(attrs={"rows": 5}),
             "jurados": forms.Textarea(attrs={"rows": 4, "placeholder": "Ej.\nDr. Carlos Méndez\nIng. Rosa Belén Castillo\nIng. José Rodríguez", "class": "w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-unphu resize-y"}),
-            "cuatrimestre_min": forms.NumberInput(attrs={"min": 1, "max": 10}),
-            "cuatrimestre_max": forms.NumberInput(attrs={"min": 1, "max": 10}),
+            "cuatrimestre_min": forms.NumberInput(attrs={"min": 1, "max": 12}),
+            "cuatrimestre_max": forms.NumberInput(attrs={"min": 1, "max": 12}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -129,6 +131,7 @@ class EventoForm(forms.ModelForm):
             "nombre"
         )
         self.fields["enlace_virtual"].required = False
+        self.fields["es_cocurricular"].required = False
         self.fields["defensor"].required = False
         self.fields["jurados"].required = False
         self.fields["cuatrimestre_min"].required = False
@@ -168,6 +171,12 @@ class EventoForm(forms.ModelForm):
                 "El cuatrimestre máximo debe ser mayor o igual al cuatrimestre mínimo.",
             )
 
+        if not cleaned.get("enlace_virtual") and cleaned.get("cupo_maximo") == 0:
+            self.add_error(
+                "cupo_maximo",
+                "Los eventos presenciales deben tener un cupo máximo definido (mayor a 0).",
+            )
+
         if cleaned.get("tipo") == "TESIS":
             if not cleaned.get("defensor"):
                 self.add_error("defensor", "El nombre del defensor es obligatorio para presentaciones de tesis.")
@@ -183,23 +192,23 @@ class ConfiguracionNotificacionForm(forms.ModelForm):
         fields = [
             "confirmacion_inscripcion",
             "recordatorio_evento",
-            "dias_recordatorio",
+            "horas_recordatorio",
             "notificar_nueva_actividad_escuela",
             "notificar_nueva_actividad_facultad",
         ]
         labels = {
             "confirmacion_inscripcion": "Confirmación de inscripción",
             "recordatorio_evento": "Recordatorio antes del evento",
-            "dias_recordatorio": "Días de anticipación para el recordatorio",
+            "horas_recordatorio": "Horas de anticipación para el recordatorio",
             "notificar_nueva_actividad_escuela": "Notificarme cuando haya nuevos eventos en mi escuela",
             "notificar_nueva_actividad_facultad": "Notificarme cuando haya nuevos eventos en mi facultad",
         }
         widgets = {
-            "dias_recordatorio": forms.NumberInput(attrs={"min": 1, "max": 30}),
+            "horas_recordatorio": forms.NumberInput(attrs={"min": 1, "max": 72}),
         }
 
-    def clean_dias_recordatorio(self):
-        dias = self.cleaned_data.get("dias_recordatorio")
-        if dias is not None and dias < 1:
-            raise forms.ValidationError("Debe ser al menos 1 día.")
-        return dias
+    def clean_horas_recordatorio(self):
+        horas = self.cleaned_data.get("horas_recordatorio")
+        if horas is not None and horas < 1:
+            raise forms.ValidationError("Debe ser al menos 1 hora.")
+        return horas

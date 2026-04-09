@@ -8,6 +8,7 @@ Te recordamos que tienes un evento próximo:
   Lugar:   {{ evento.lugar }}
   Escuela: {{ evento.escuela.nombre }}
 
+Este recordatorio se envía {{ horas }} hora{{ horas|pluralize }} antes del evento.
 ¡No lo olvides! Si no puedes asistir, puedes cancelar tu inscripción desde
 el portal.
 

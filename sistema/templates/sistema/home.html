@@ -87,11 +87,31 @@
               class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-unphu" />
           </div>
 
+          <!-- Filtros rápidos -->
+          <div class="space-y-2 pt-1">
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input type="checkbox" name="virtual" value="1" {% if filtros.virtual == "1" %}checked{% endif %}
+                class="w-4 h-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500" />
+              <span class="text-sm text-gray-700 flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-indigo-500 inline-block"></span>
+                Solo virtuales
+              </span>
+            </label>
+            <label class="flex items-center gap-2 cursor-pointer select-none">
+              <input type="checkbox" name="cocurricular" value="1" {% if filtros.cocurricular == "1" %}checked{% endif %}
+                class="w-4 h-4 rounded border-gray-300 text-emerald-600 focus:ring-emerald-500" />
+              <span class="text-sm text-gray-700 flex items-center gap-1">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span>
+                Solo cocurriculares
+              </span>
+            </label>
+          </div>
+
           <button type="submit" class="w-full bg-unphu hover:bg-unphu-dark text-white font-semibold py-2 rounded-lg transition-colors text-sm">
             Aplicar filtros
           </button>
 
-          {% if filtros.tipo or filtros.escuela or filtros.facultad or filtros.lugar or filtros.fecha_desde or filtros.fecha_hasta %}
+          {% if filtros.tipo or filtros.escuela or filtros.facultad or filtros.lugar or filtros.fecha_desde or filtros.fecha_hasta or filtros.cocurricular or filtros.virtual %}
             <a href="{% url 'home' %}" class="block text-center text-sm text-red-500 hover:text-red-700 transition-colors">
               ✕ Limpiar filtros
             </a>

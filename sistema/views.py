@@ -88,6 +88,8 @@ def home(request):
     lugar = request.GET.get("lugar", "")
     fecha_desde = request.GET.get("fecha_desde", "")
     fecha_hasta = request.GET.get("fecha_hasta", "")
+    solo_cocurricular = request.GET.get("cocurricular", "")
+    solo_virtual = request.GET.get("virtual", "")
 
     if tipo:
         qs = qs.filter(tipo=tipo)
@@ -101,6 +103,10 @@ def home(request):
         qs = qs.filter(fecha_evento__gte=fecha_desde)
     if fecha_hasta:
         qs = qs.filter(fecha_evento__lte=fecha_hasta)
+    if solo_cocurricular == "1":
+        qs = qs.filter(es_cocurricular=True)
+    if solo_virtual == "1":
+        qs = qs.exclude(enlace_virtual="")
 
     eventos = list(qs)
 
@@ -134,6 +140,8 @@ def home(request):
             "lugar": lugar,
             "fecha_desde": fecha_desde,
             "fecha_hasta": fecha_hasta,
+            "cocurricular": solo_cocurricular,
+            "virtual": solo_virtual,
         },
     }
     return render(request, "sistema/home.html", context)

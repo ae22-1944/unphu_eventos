@@ -188,7 +188,7 @@ class ConfiguracionNotificacionAdmin(admin.ModelAdmin):
         "usuario",
         "confirmacion_inscripcion",
         "recordatorio_evento",
-        "dias_recordatorio",
+        "horas_recordatorio",
         "notificar_nueva_actividad_escuela",
         "notificar_nueva_actividad_facultad",
     ]
